@@ -1,8 +1,8 @@
 /* 1. Conta gli ospiti raggruppandoli per anno di nascita*/
 
-SELECT COUNT(`id`), YEAR(`date_of_birth`)
+SELECT COUNT(`id`) AS "ospiti", YEAR(`date_of_birth`)
 FROM `ospiti`
-GROUP BY `date_of_birth`
+GROUP BY YEAR(`date_of_birth`)
 
 /*2. Somma i prezzi dei pagamenti raggruppandoli per status*/
 
@@ -29,3 +29,9 @@ ORDER BY COUNT(`created_at`) DESC
 
 /*5. Quante prenotazioni ha fatto l’ospite che ha fatto più
 prenotazioni? (quante, non chi!)*/
+
+SELECT `ospite_id`, COUNT(*) AS `prenotazioni`
+FROM `prenotazioni_has_ospiti`
+GROUP BY `ospite_id`
+ORDER BY `prenotazioni`
+DESC LIMIT 1
